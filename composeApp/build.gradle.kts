@@ -35,6 +35,8 @@ kotlin {
             implementation(libs.compose.components.ui.tooling.preview)
             implementation(libs.lifecycle.viewmodel.compose)
             implementation(libs.kotlinx.coroutines.core)
+            implementation(libs.koin.compose)
+            implementation(libs.koin.compose.viewmodel)
             implementation(project(":shared"))
         }
 
@@ -42,6 +44,7 @@ kotlin {
             implementation(libs.androidx.activity.compose)
             implementation(libs.androidx.core.ktx)
             implementation(libs.kotlinx.coroutines.android)
+            implementation(libs.koin.android)
         }
 
         commonTest.dependencies {

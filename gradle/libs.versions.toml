@@ -6,6 +6,7 @@ room                        = "2.8.4"
 sqlite                      = "2.6.2"
 ktor                        = "3.4.1"
 kotlinx-serialization       = "1.10.0"
+koin                        = "4.1.1"
 compose-multiplatform       = "1.10.2"
 compose-material3           = "1.9.0"
 compose-bom                 = "2026.02.01"
@@ -53,6 +54,12 @@ ktor-client-logging               = { group = "io.ktor", name = "ktor-client-log
 ktor-client-android               = { group = "io.ktor", name = "ktor-client-android",               version.ref = "ktor" }
 ktor-client-darwin                = { group = "io.ktor", name = "ktor-client-darwin",                version.ref = "ktor" }
 kotlinx-serialization-json        = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
+
+# Koin
+koin-core             = { group = "io.insert-koin", name = "koin-core",             version.ref = "koin" }
+koin-android          = { group = "io.insert-koin", name = "koin-android",          version.ref = "koin" }
+koin-compose          = { group = "io.insert-koin", name = "koin-compose",          version.ref = "koin" }
+koin-compose-viewmodel = { group = "io.insert-koin", name = "koin-compose-viewmodel", version.ref = "koin" }
 
 # Room KMP
 room-runtime   = { group = "androidx.room",   name = "room-runtime",   version.ref = "room" }
