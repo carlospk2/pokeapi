@@ -41,6 +41,7 @@ kotlinx-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-
 
 # Multiplatform ViewModel (JetBrains fork with KMP support)
 lifecycle-viewmodel-compose = { group = "org.jetbrains.androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "lifecycle-viewmodel-compose" }
+lifecycle-runtime-compose   = { group = "org.jetbrains.androidx.lifecycle", name = "lifecycle-runtime-compose",   version.ref = "lifecycle-viewmodel-compose" }
 
 # Coil (KMP image loading)
 coil-compose      = { group = "io.coil-kt.coil3", name = "coil-compose",      version.ref = "coil" }

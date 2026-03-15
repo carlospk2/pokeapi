@@ -11,5 +11,7 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun noteDao(): NoteDao
 }
 
-// KSP genera la implementación `actual` para cada target
-expect object AppDatabaseConstructor : RoomDatabaseConstructor<AppDatabase>
+@Suppress("NO_ACTUAL_FOR_EXPECT")
+expect object AppDatabaseConstructor : RoomDatabaseConstructor<AppDatabase> {
+    override fun initialize(): AppDatabase
+}

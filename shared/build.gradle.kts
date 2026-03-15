@@ -47,6 +47,7 @@ kotlin {
         androidMain.dependencies {
             implementation(libs.kotlinx.coroutines.android)
             implementation(libs.ktor.client.android)
+            implementation(libs.koin.android)
         }
 
         iosMain.dependencies {

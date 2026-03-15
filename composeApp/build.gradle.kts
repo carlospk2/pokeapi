@@ -33,6 +33,7 @@ kotlin {
             implementation(libs.compose.components.resources)
             implementation(libs.compose.components.ui.tooling.preview)
             implementation(libs.lifecycle.viewmodel.compose)
+            implementation(libs.lifecycle.runtime.compose)
             implementation(libs.kotlinx.coroutines.core)
             implementation(libs.koin.compose)
             implementation(libs.koin.compose.viewmodel)
