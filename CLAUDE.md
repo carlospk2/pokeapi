@@ -81,6 +81,16 @@ These flags are **required**. Removing them breaks the build.
 - Ktor uses `ktor-client-darwin` engine on iOS (in `iosMain`)
 - Room database path on iOS uses `NSDocumentDirectory` via `NSFileManager`
 
+## Commit Convention
+
+All commits must follow [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/):
+
+```
+<type>[optional scope]: <description>
+```
+
+Common types: `feat`, `fix`, `chore`, `refactor`, `docs`, `test`. Example: `feat(database): add user entity`.
+
 ## Adding New Dependencies
 
 1. Add version to `[versions]` in `libs.versions.toml`
