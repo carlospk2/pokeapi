@@ -74,12 +74,18 @@ android.newDsl=false          # required for com.android.library + kotlin.multip
 
 These flags are **required**. Removing them breaks the build.
 
-## iOS-specific Notes
+## iOS Development
 
-- iOS frameworks are **static** (`isStatic = true`) in both `shared` and `composeApp`
+**Run on simulator:** Open `iosApp/iosApp/iosApp.xcodeproj` in Xcode and run. Xcode calls Gradle automatically to build the `ComposeApp.framework` via a build phase script.
+
+**Swift entry point chain:** `iosAppApp.swift` → `ContentView.swift` → `ComposeView` (UIViewControllerRepresentable) → `MainViewControllerKt.MainViewController()` (Kotlin/CMP).
+
+**Framework notes:**
+- Both `shared` and `composeApp` produce **static** frameworks (`isStatic = true`)
 - `shared` iOS targets require `linkerOpts.add("-lsqlite3")` for Room's `BundledSQLiteDriver`
 - Ktor uses `ktor-client-darwin` engine on iOS (in `iosMain`)
 - Room database path on iOS uses `NSDocumentDirectory` via `NSFileManager`
+- cinterop calls (e.g. `NSFileManager`) require `@OptIn(kotlinx.cinterop.ExperimentalForeignApi::class)`
 
 ## Commit Convention
 
