@@ -1,4 +1,4 @@
-package com.example.kmm_jcmm_test.shared.database
+package com.example.kmm_jcmm_test.shared.features.notes.data.local.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
