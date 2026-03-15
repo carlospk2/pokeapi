@@ -1,31 +1,53 @@
 [versions]
-agp = "9.0.1"
-coreKtx = "1.10.1"
-junit = "4.13.2"
-junitVersion = "1.1.5"
-espressoCore = "3.5.1"
-lifecycleRuntimeKtx = "2.6.1"
-activityCompose = "1.8.0"
-kotlin = "2.0.21"
-composeBom = "2024.09.00"
+agp                         = "9.0.1"
+kotlin                      = "2.3.10"
+compose-multiplatform       = "1.7.3"
+compose-bom                 = "2026.02.01"
+coroutines                  = "1.10.2"
+lifecycle-viewmodel-compose = "2.9.6"
+
+# Android-only supporting libraries
+androidx-core-ktx           = "1.16.0"
+androidx-activity-compose   = "1.10.1"
+
+# Testing
+junit                       = "4.13.2"
+androidx-junit              = "1.2.1"
+androidx-espresso           = "3.6.1"
 
 [libraries]
-androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
-junit = { group = "junit", name = "junit", version.ref = "junit" }
-androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
-androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
-androidx-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycleRuntimeKtx" }
-androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activityCompose" }
-androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "composeBom" }
-androidx-compose-ui = { group = "androidx.compose.ui", name = "ui" }
-androidx-compose-ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics" }
+# Compose Multiplatform — explicit versions so KMP source sets resolve them correctly
+compose-runtime                        = { group = "org.jetbrains.compose.runtime",    name = "runtime",                       version.ref = "compose-multiplatform" }
+compose-foundation                     = { group = "org.jetbrains.compose.foundation",  name = "foundation",                    version.ref = "compose-multiplatform" }
+compose-material3                      = { group = "org.jetbrains.compose.material3",   name = "material3",                     version.ref = "compose-multiplatform" }
+compose-ui                             = { group = "org.jetbrains.compose.ui",          name = "ui",                            version.ref = "compose-multiplatform" }
+compose-components-resources           = { group = "org.jetbrains.compose.components",  name = "components-resources",          version.ref = "compose-multiplatform" }
+compose-components-ui-tooling-preview  = { group = "org.jetbrains.compose.components",  name = "components-ui-tooling-preview", version.ref = "compose-multiplatform" }
+
+# KMP / coroutines
+kotlinx-coroutines-core    = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core",    version.ref = "coroutines" }
+kotlinx-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "coroutines" }
+
+# Multiplatform ViewModel (JetBrains fork with KMP support)
+lifecycle-viewmodel-compose = { group = "org.jetbrains.androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "lifecycle-viewmodel-compose" }
+
+# Android platform libraries
+androidx-core-ktx         = { group = "androidx.core",     name = "core-ktx",        version.ref = "androidx-core-ktx" }
+androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "androidx-activity-compose" }
+
+# AndroidX Compose BOM — for Android-specific debug tooling only
+androidx-compose-bom        = { group = "androidx.compose",    name = "compose-bom",      version.ref = "compose-bom" }
 androidx-compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
-androidx-compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
-androidx-compose-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
-androidx-compose-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
-androidx-compose-material3 = { group = "androidx.compose.material3", name = "material3" }
+
+# Testing
+junit                  = { group = "junit",                  name = "junit",         version.ref = "junit" }
+androidx-junit         = { group = "androidx.test.ext",      name = "junit",         version.ref = "androidx-junit" }
+androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "androidx-espresso" }
 
 [plugins]
-android-application = { id = "com.android.application", version.ref = "agp" }
-kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
-
+android-application                  = { id = "com.android.application",                    version.ref = "agp" }
+android-library                      = { id = "com.android.library",                        version.ref = "agp" }
+android-kotlin-multiplatform-library = { id = "com.android.kotlin.multiplatform.library",   version.ref = "agp" }
+kotlin-multiplatform                 = { id = "org.jetbrains.kotlin.multiplatform",          version.ref = "kotlin" }
+kotlin-compose-compiler              = { id = "org.jetbrains.kotlin.plugin.compose",         version.ref = "kotlin" }
+compose-multiplatform                = { id = "org.jetbrains.compose",                       version.ref = "compose-multiplatform" }
