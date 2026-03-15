@@ -39,6 +39,8 @@ kotlin {
             implementation(libs.navigation3.ui)
             implementation(libs.lifecycle.viewmodel.navigation3)
             implementation(libs.adaptive.navigation3)
+            implementation(libs.coil.compose)
+            implementation(libs.coil.network.ktor3)
             implementation(project(":shared"))
         }
 
