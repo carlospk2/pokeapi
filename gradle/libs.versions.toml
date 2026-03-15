@@ -1,6 +1,9 @@
 [versions]
 agp                         = "9.1.0"
 kotlin                      = "2.3.10"
+ksp                         = "2.3.6"
+room                        = "2.8.4"
+sqlite                      = "2.6.2"
 compose-multiplatform       = "1.10.2"
 compose-material3           = "1.9.0"
 compose-bom                 = "2026.02.01"
@@ -40,6 +43,11 @@ androidx-activity-compose = { group = "androidx.activity", name = "activity-comp
 androidx-compose-bom        = { group = "androidx.compose",    name = "compose-bom",      version.ref = "compose-bom" }
 androidx-compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
 
+# Room KMP
+room-runtime   = { group = "androidx.room",   name = "room-runtime",   version.ref = "room" }
+room-compiler  = { group = "androidx.room",   name = "room-compiler",  version.ref = "room" }
+sqlite-bundled = { group = "androidx.sqlite", name = "sqlite-bundled", version.ref = "sqlite" }
+
 # Testing
 junit                  = { group = "junit",                  name = "junit",         version.ref = "junit" }
 androidx-junit         = { group = "androidx.test.ext",      name = "junit",         version.ref = "androidx-junit" }
@@ -52,3 +60,5 @@ android-kotlin-multiplatform-library = { id = "com.android.kotlin.multiplatform.
 kotlin-multiplatform                 = { id = "org.jetbrains.kotlin.multiplatform",          version.ref = "kotlin" }
 kotlin-compose-compiler              = { id = "org.jetbrains.kotlin.plugin.compose",         version.ref = "kotlin" }
 compose-multiplatform                = { id = "org.jetbrains.compose",                       version.ref = "compose-multiplatform" }
+ksp                                  = { id = "com.google.devtools.ksp",                     version.ref = "ksp" }
+room                                 = { id = "androidx.room",                               version.ref = "room" }
