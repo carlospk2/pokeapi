@@ -1,14 +1,15 @@
 [versions]
-agp                         = "9.0.1"
+agp                         = "9.1.0"
 kotlin                      = "2.3.10"
-compose-multiplatform       = "1.7.3"
+compose-multiplatform       = "1.10.2"
+compose-material3           = "1.9.0"
 compose-bom                 = "2026.02.01"
 coroutines                  = "1.10.2"
 lifecycle-viewmodel-compose = "2.9.6"
 
 # Android-only supporting libraries
-androidx-core-ktx           = "1.16.0"
-androidx-activity-compose   = "1.10.1"
+androidx-core-ktx           = "1.18.0"
+androidx-activity-compose   = "1.13.0"
 
 # Testing
 junit                       = "4.13.2"
@@ -19,7 +20,7 @@ androidx-espresso           = "3.6.1"
 # Compose Multiplatform — explicit versions so KMP source sets resolve them correctly
 compose-runtime                        = { group = "org.jetbrains.compose.runtime",    name = "runtime",                       version.ref = "compose-multiplatform" }
 compose-foundation                     = { group = "org.jetbrains.compose.foundation",  name = "foundation",                    version.ref = "compose-multiplatform" }
-compose-material3                      = { group = "org.jetbrains.compose.material3",   name = "material3",                     version.ref = "compose-multiplatform" }
+compose-material3                      = { group = "org.jetbrains.compose.material3",   name = "material3",                     version.ref = "compose-material3" }
 compose-ui                             = { group = "org.jetbrains.compose.ui",          name = "ui",                            version.ref = "compose-multiplatform" }
 compose-components-resources           = { group = "org.jetbrains.compose.components",  name = "components-resources",          version.ref = "compose-multiplatform" }
 compose-components-ui-tooling-preview  = { group = "org.jetbrains.compose.components",  name = "components-ui-tooling-preview", version.ref = "compose-multiplatform" }
