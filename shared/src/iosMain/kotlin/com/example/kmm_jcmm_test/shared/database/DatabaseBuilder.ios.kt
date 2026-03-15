@@ -1,3 +1,5 @@
+@file:OptIn(kotlinx.cinterop.ExperimentalForeignApi::class)
+
 package com.example.kmm_jcmm_test.shared.database
 
 import androidx.room.Room

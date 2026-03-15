@@ -1,3 +1,10 @@
+//
+//  ContentView.swift
+//  iosApp
+//
+//  Created by Carlos Rosiles  on 14/03/26.
+//
+
 import UIKit
 import SwiftUI
 import ComposeApp
