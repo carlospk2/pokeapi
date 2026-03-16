@@ -72,7 +72,7 @@ dependencies {
 }
 
 android {
-    namespace  = "com.example.kmm_jcmm_test.shared"
+    namespace  = "com.example.pokeapi.shared"
     compileSdk = 36
 
     defaultConfig {

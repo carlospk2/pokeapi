@@ -59,11 +59,11 @@ kotlin {
 }
 
 android {
-    namespace = "com.example.kmm_jcmm_test"
+    namespace = "com.example.pokeapi"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.example.kmm_jcmm_test"
+        applicationId = "com.example.pokeapi"
         minSdk = 26
         targetSdk = 36
         versionCode = 1

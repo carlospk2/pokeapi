@@ -4,11 +4,93 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Kotlin Multiplatform (KMP) + Compose Multiplatform (CMP) project targeting **Android and iOS**.
+Juego de batallas Pokémon por turnos con estética retro GBA, construido con **Kotlin Multiplatform (KMP) + Compose Multiplatform (CMP)** para Android e iOS. El jugador arma equipos de 6 Pokémon del catálogo Gen I-III (386 Pokémon) y se enfrenta a entrenadores CPU en un sistema de combate basado en tipos, stats y movimientos. Datos reales de PokéAPI, funcionamiento offline-first.
 
-- **Package:** `com.example.kmm_jcmm_test`
+- **Package:** `com.example.pokeapi`
 - **Min SDK:** 26 | **Target/Compile SDK:** 36 | **iOS min:** 16
 - **Kotlin:** 2.3.10 | **AGP:** 9.1.0 | **Gradle:** 9.4.0 | **CMP:** 1.10.2 | **JVM toolchain:** 11
+
+## Product — Funcionalidades V1.0
+
+**Catálogo y Datos Pokémon:**
+- Sync inicial desde PokéAPI → Room local (386 Pokémon, moves, tipos, sprites)
+- Pokédex navegable con búsqueda y filtros por tipo/generación
+- Tabla de ventajas/desventajas de tipos (TypeEffectiveness)
+
+**Armado de Equipo:**
+- Selección de 6 Pokémon, 4 movimientos cada uno, nivel configurable (1-100)
+- Guardado de múltiples equipos. No repetir Pokémon en un equipo.
+
+**Sistema de Batalla por Turnos:**
+- Combate 1v1 (un Pokémon activo por lado, cambio consume turno)
+- Daño: `((2*Lvl/5+2) * Power * (Atk/Def)) / 50 + 2) * STAB * TypeEff * Random(0.85-1.0)`
+- Stats simplificados sin EVs/IVs: HP = `((2*Base*Lvl)/100) + Lvl + 10`, otros = `((2*Base*Lvl)/100) + 5`
+- STAB x1.5, PP system, priority > Speed para orden de turno
+- Physical vs special por movimiento, accuracy check
+
+**Entrenadores CPU:**
+- 15-20 entrenadores en 4 tiers de dificultad (easy/medium/hard AI)
+- AI: easy=random, medium=prioriza super effective, hard=evalúa daño óptimo + considera switch
+
+**Récords:** Historial de batallas, W/L, rachas, stats por entrenador.
+
+## Entidades del Sistema
+
+| Entidad | Campos clave |
+|---|---|
+| **Pokemon** | pokedex_number, name, sprite_url, sprite_local_path, type_primary, type_secondary?, base stats (6), generation |
+| **Move** | move_id, name, type, category (physical/special), power?, accuracy, pp, priority |
+| **PokemonMove** | pokemon_id, move_id, learn_method |
+| **TypeEffectiveness** | attacking_type, defending_type, multiplier (0/0.5/1/2) |
+| **Team** | team_id, name, created_at, updated_at |
+| **TeamMember** | team_member_id, team_id, pokemon_id, slot (1-6), level, move_1..4_id |
+| **Trainer** | trainer_id, name, sprite_key, difficulty_tier, team config, ai_strategy |
+| **BattleRecord** | record_id, trainer_id, player_team_id, result, turns_count, date, pokemon_remaining |
+| **PlayerStats** | total_wins, total_losses, current_streak, best_streak, total_battles |
+
+## Plan de Desarrollo (4 Fases)
+
+**Fase 1 — Fundamentos (Datos y Sync):**
+1.1 Esquema DB Room (entities, DAOs) → 1.2 Cliente PokéAPI (Ktor, DTOs, mappers) → 1.3 Motor de Sync (orquesta descarga 386 Pokémon + sprites + moves, progreso como Flow, reanudable) → 1.4 Pokédex (lista, búsqueda, filtros, detalle)
+
+**Fase 2 — Core (Equipos y Motor de Batalla):**
+2.1 Gestión de Equipos (CRUD, selección de Pokémon/moves) → 2.2 Cálculo de Stats (lógica pura + tests) → 2.3 Battle Engine (state machine, daño, STAB, type effectiveness, accuracy, faint, determinista con seed) → 2.4 AI del Oponente (3 estrategias)
+
+**Fase 3 — Experiencia (UI de Batalla y Entrenadores):**
+3.1 Datos de Entrenadores (15-20, 4 tiers) → 3.2 UI Batalla Layout (estilo GBA, barras HP, panel acciones) → 3.3 UI Batalla Animaciones (typewriter text, animación daño/faint, flujo turno) → 3.4 Pantalla Sync Inicial
+
+**Fase 4 — Polish:**
+4.1 Récords y estadísticas → 4.2 Menú principal y navegación → 4.3 Polish visual retro (pixel font, paleta, estados vacíos/loading/error)
+
+## Dirección de Diseño — Estética GBA Retro
+
+**Personalidad:** Memoria emocional de Pokémon Ruby/Sapphire/Emerald en app moderna. Pixel art intencional, no decorativo. No es un skin retro sobre Material Design — es el lenguaje visual completo.
+
+**Color:**
+- Tema dark preferente, fondos gris-azulado oscuro (no negro puro)
+- Primario: azul profundo de las cajas de diálogo Gen III
+- Acentos: colores de tipo Pokémon (funcionales primero)
+- Barra HP: verde → amarillo → rojo (gradiente sagrado)
+
+**Tipografía:** Pixel bitmap. Jerarquía por tamaño, no por weight. Nombres de Pokémon y movimientos en MAYÚSCULAS.
+
+**Forma:** Esquinas rectas (1-2px max), bordes visibles con highlight/shadow estilo ventana 16-bit, grid de 8px, sin drop shadows modernos.
+
+**Interacción:** Transiciones deliberadas (100-200ms), texto typewriter, sprites nearest-neighbor scaling (sin antialiasing), tap targets ≥48dp. Portrait fijo.
+
+**Sprites:** Priorizar Gen III (Ruby/Sapphire). Escalar con nearest-neighbor interpolation (FilterQuality en Compose). Almacenados localmente post-sync.
+
+**NO es:** gradientes suaves, blur, glassmorphism, rounded corners grandes, FABs, bottom sheets, tipografía del sistema, animaciones ease-in-out suaves.
+
+**Referencias:** Pokémon Emerald (layout batalla, menús), FireRed/LeafGreen (Pokédex), Pokémon Stadium (selección equipo), Undertale (pixel art moderno), Shovel Knight (pixel art expresivo).
+
+## Documentación de Referencia
+
+Para guía detallada sobre el producto, diseño y plan de desarrollo, consultar:
+
+- **`docs/brief.md`** — Brief del producto: funcionalidades V1.0, entidades, flujos principales, reglas de negocio, integraciones (PokéAPI)
+- **`docs/design.md`** — Dirección de diseño: estética GBA, paleta de colores, tipografía pixel, interacciones, dirección por pantalla
+- **`docs/plan.md`** — Plan de módulos: 4 fases de desarrollo, dependencias entre módulos, criterios de completitud, cronograma
 
 ## Common Commands
 

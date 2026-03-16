@@ -26,6 +26,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "kmm-jcmm-test"
+rootProject.name = "pokeapi"
 include(":composeApp")
 include(":shared")
