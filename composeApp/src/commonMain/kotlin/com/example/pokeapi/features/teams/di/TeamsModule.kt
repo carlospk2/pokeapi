@@ -10,7 +10,7 @@ import org.koin.dsl.module
 
 val teamsModule = module {
     viewModelOf(::TeamListViewModel)
-    viewModel { params -> TeamEditViewModel(params.get(), get(), get(), get()) }
+    viewModel { params -> TeamEditViewModel(params.getOrNull<Long>(), get(), get(), get()) }
     viewModel { params -> PokemonSelectorViewModel(params.get(), params.get(), get(), get()) }
     viewModel { params -> MoveSelectorViewModel(params.get(), params.get(), params.get(), get(), get()) }
 }
