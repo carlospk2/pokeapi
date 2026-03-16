@@ -183,7 +183,10 @@ class SyncRepositoryImpl(
     }
 
     override suspend fun isSyncCompleted(): Boolean {
-        return syncStatusDao.get()?.isCompleted == true
+        val status = syncStatusDao.get() ?: return false
+        if (!status.isCompleted) return false
+        // Verify there's actual data — guards against sync that "completed" with all errors
+        return pokemonDao.count() > 100
     }
 }
 
