@@ -1,6 +1,5 @@
 package com.example.pokeapi.shared.di
 
-import com.example.pokeapi.shared.features.notes.di.noteModule
 import com.example.pokeapi.shared.features.sync.di.syncModule
 import org.koin.core.context.GlobalContext
 import org.koin.core.context.startKoin
@@ -17,7 +16,6 @@ fun initKoin(
             platformModule(),
             databaseModule,
             sharedModule,
-            noteModule,
             syncModule,
             *extraModules.toTypedArray()
         )

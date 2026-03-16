@@ -1,15 +1,22 @@
 package com.example.pokeapi.di
 
-import com.example.pokeapi.features.notes.presentation.NoteListViewModel
-import org.koin.core.module.dsl.viewModelOf
-import org.koin.dsl.module
+import com.example.pokeapi.features.battle.di.battleModule
+import com.example.pokeapi.features.pokedex.di.pokedexModule
+import com.example.pokeapi.features.records.di.recordsModule
+import com.example.pokeapi.features.sync.di.syncUiModule
+import com.example.pokeapi.features.teams.di.teamsModule
+import com.example.pokeapi.features.trainers.di.trainersModule
+import org.koin.core.module.Module
 
 /**
- * Módulos de ViewModels para composeApp.
- * Se pasa como extraModules en initKoin() desde cada entry point de plataforma.
+ * All composeApp ViewModel modules.
+ * Passed as extraModules to initKoin() from each platform entry point.
  */
-val viewModelModules = listOf(
-    module {
-        viewModelOf(::NoteListViewModel)
-    }
+val viewModelModules: List<Module> = listOf(
+    syncUiModule,
+    pokedexModule,
+    teamsModule,
+    trainersModule,
+    battleModule,
+    recordsModule
 )
