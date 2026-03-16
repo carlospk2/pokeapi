@@ -54,10 +54,8 @@ class PokemonSelectorViewModel(
 
     fun selectPokemon(pokemonId: Int) {
         viewModelScope.launch {
-            val existing = teamMemberDao.getMembersForTeam(teamId).find { it.slot == slot }
-            if (existing != null) {
-                teamMemberDao.delete(existing)
-            }
+            // Delete any existing member at this exact (teamId, slot) — atomic, no ViewModel state dependency
+            teamMemberDao.deleteBySlot(teamId, slot)
             teamMemberDao.insert(TeamMemberEntity(
                 teamId = teamId,
                 pokemonId = pokemonId,

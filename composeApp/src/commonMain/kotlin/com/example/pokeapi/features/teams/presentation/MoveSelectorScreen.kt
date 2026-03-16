@@ -38,10 +38,7 @@ fun MoveSelectorScreen(
     slot: Int,
     pokemonId: Int,
     onSaved: () -> Unit,
-    viewModel: MoveSelectorViewModel = koinViewModel(
-        key = "move_selector_${teamId}_${slot}_${pokemonId}",
-        parameters = { parametersOf(teamId, slot, pokemonId) }
-    )
+    viewModel: MoveSelectorViewModel = koinViewModel(parameters = { parametersOf(teamId, slot, pokemonId) })
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
 

@@ -26,6 +26,9 @@ interface TeamMemberDao {
     @Query("SELECT * FROM team_members WHERE teamId = :teamId ORDER BY slot ASC")
     fun observeMembersForTeam(teamId: Long): Flow<List<TeamMemberEntity>>
 
+    @Query("DELETE FROM team_members WHERE teamId = :teamId AND slot = :slot")
+    suspend fun deleteBySlot(teamId: Long, slot: Int)
+
     @Query("DELETE FROM team_members WHERE teamId = :teamId")
     suspend fun deleteMembersForTeam(teamId: Long)
 }
