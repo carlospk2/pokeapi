@@ -6,6 +6,7 @@ import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
 import com.example.pokeapi.shared.database.entity.TeamMemberEntity
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface TeamMemberDao {
@@ -21,6 +22,9 @@ interface TeamMemberDao {
 
     @Query("SELECT * FROM team_members WHERE teamId = :teamId ORDER BY slot ASC")
     suspend fun getMembersForTeam(teamId: Long): List<TeamMemberEntity>
+
+    @Query("SELECT * FROM team_members WHERE teamId = :teamId ORDER BY slot ASC")
+    fun observeMembersForTeam(teamId: Long): Flow<List<TeamMemberEntity>>
 
     @Query("DELETE FROM team_members WHERE teamId = :teamId")
     suspend fun deleteMembersForTeam(teamId: Long)
