@@ -39,7 +39,10 @@ fun PokemonSelectorScreen(
     teamId: Long,
     slot: Int,
     onSelected: () -> Unit,
-    viewModel: PokemonSelectorViewModel = koinViewModel(parameters = { parametersOf(teamId, slot) })
+    viewModel: PokemonSelectorViewModel = koinViewModel(
+        key = "pokemon_selector_${teamId}_${slot}",
+        parameters = { parametersOf(teamId, slot) }
+    )
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
 
